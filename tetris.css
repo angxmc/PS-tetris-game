@@ -1,0 +1,25 @@
+/* style the background container*/
+.container{
+    width: 200px;
+    height:360px;
+    background-color: #ffdead;
+    position: relative;
+}
+
+/* style the 20*20 block element*/ 
+.activity-model{
+    width:20px;
+    height: 20px;
+    background-color: lightcoral;
+    border: 0.3px solid #A8A196 ;
+    box-sizing: border-box;
+    position: absolute;
+}
+.fixed-model{
+    width:20px;
+    height: 20px;
+    background-color: #616161;
+    border: 0.3px solid #A8A196 ;
+    box-sizing: border-box;
+    position: absolute;
+}
