@@ -1,4 +1,3 @@
-
 //constant
 //the distance moved every time, step length
 const step = 20;
@@ -7,7 +6,7 @@ const step = 20;
 const row_count = 18;
 const col_count = 10;
 
-// >> create each model's data source, the rols and cols of each shape
+// >> create each model's data source, the rows and cols of each shape
 const models = [
   //the first data source(L shape) horizontal L with tail facing up
   {
@@ -32,10 +31,86 @@ const models = [
       col: 2,
     },
   },
+  //2nd shape (T)
+  {
+    0: {
+      row: 1,
+      col: 1,
+    },
+    1: {
+      row: 0,
+      col: 0,
+    },
+    2: {
+      row: 1,
+      col: 0,
+    },
+    3: {
+      row: 2,
+      col: 0,
+    },
+  },
+  //3rd Shape (o/square)
+  {
+    0: {
+      row: 1,
+      col: 1,
+    },
+    1: {
+      row: 2,
+      col: 1,
+    },
+    2: {
+      row: 1,
+      col: 2,
+    },
+    3: {
+      row: 2,
+      col: 2,
+    },
+  },
+  //4th Shape (I)
+  {
+    0: {
+      row: 0,
+      col: 0,
+    },
+    1: {
+      row: 0,
+      col: 1,
+    },
+    2: {
+      row: 0,
+      col: 2,
+    },
+    3: {
+      row: 0,
+      col: 3,
+    },
+  },
+  //5th Shape (Z)
+  {
+    0: {
+      row: 1,
+      col: 1,
+    },
+    1: {
+      row: 1,
+      col: 2,
+    },
+    2: {
+      row: 2,
+      col: 2,
+    },
+    3: {
+      row: 2,
+      col: 3,
+    },
+  },
 ];
 
 //create a variable
-// >> representing the model we are using
+// - representing the model we are using
 let currentModel = {};
 
 // to mark the 16-grid location
@@ -46,6 +121,9 @@ let currentY = 0;
 // key:value
 //key = row_col, value = block element
 const fixedBlocks = {};
+//timer
+let mInterval = null;
+
 //entering game board
 function init() {
   createModel();
@@ -54,8 +132,14 @@ function init() {
 
 // based on the model data source to create the block elements
 function createModel() {
+  // = test if the game can continue first
+  if(isGameOver()){
+    gameOver();
+    return;
+  }
   //have to determine which model to use first, picked out fromm the list of Model object.
-  currentModel = models[0];
+  //this will have to generate a random shape based on lodash
+  currentModel = models[_.random(0, models.length - 1)];
   //have to re-initiate the location of the new block, every time this function is called
   currentX = 0;
   currentY = 0;
@@ -68,6 +152,8 @@ function createModel() {
   }
   //locate the blocks
   locationBlocks();
+  //automatically drop and move the shapes
+  autoDown();
 }
 
 //position the location of the block elements based on teh data source
@@ -119,7 +205,7 @@ function onKeyDown() {
   };
 }
 
-// >> moving the block
+// >> moving the block -----------------------------------------------------------------------------------
 function move(x, y) {
   // -- control the block to move ------------------------------------------------------------------------
   //get the element first
@@ -134,6 +220,11 @@ function move(x, y) {
   //the parameters coordinate has to be the location the block is intended to go to, not it's current.
   //so we use currentX + X = when it WANTS to go
   if (isMeet(currentX + x, currentY + y, currentModel)) {
+    //when the bottom border touches, we ar moving the y-axis, so changes to the y-axis
+    if (y !== 0) {
+      //models bottom border are touched
+      fixedBottomModel();
+    }
     return;
   }
   //we want to manipulate the whole model, not just by the single block of the shape, this is where teh 16-grid(4*4) comes into play. To manipulate the entire shape, we have to locate the 16-grid inside the container.
@@ -143,7 +234,7 @@ function move(x, y) {
   locationBlocks();
 }
 
-// >> rotating the shapes
+// >> rotating the shapes --------------------------------------------------------------------------------
 function rotate() {
   //clone currentModel
   let cloneCurrentModel = _.cloneDeep(currentModel);
@@ -173,7 +264,7 @@ function rotate() {
   locationBlocks();
 }
 
-// >> control the shape models to move only within the container
+// >> control the shape models to move only within the container -----------------------------------------
 function checkBound() {
   //define the boundary of the activity
   //no need for top boundary because user cannot move it up
@@ -199,7 +290,7 @@ function checkBound() {
     }
   }
 }
-// >> fix teh blocks at the bottom
+// >> fix the blocks at the bottom -------------------------------------------------------------------
 function fixedBottomModel() {
   //1. change the model's style = changing the blocks style
   let activityModelEles = document.getElementsByClassName("activity-model");
@@ -215,12 +306,16 @@ function fixedBottomModel() {
     let blockModel = currentModel[i];
     fixedBlocks[currentY + blockModel.row + "_" + (currentX + blockModel.col)] =
       activityModelEle;
+      console.log(fixedBlocks);
   }
+
+  //call this function to determine if we need to clear the row
+  isRemoveLine();
   //3. generate new model
   createModel();
 }
 
-// >> Block-Collision
+// >> Block-Collision -------------------------------------------------------------------------------------
 //x, y represent the location/value of the coordinate the block is intended to go. not it the current
 //model represent the INTENDED direction the current shape is going to go.
 function isMeet(x, y, model) {
@@ -234,3 +329,99 @@ function isMeet(x, y, model) {
   }
   return false;
 } // ? where do we use this function? When we move the blocks!
+
+//determine if a row is all filled
+function isRemoveLine() {
+  //this means, in the row, all the cols in that row contains a block
+  //so we need ot loops though the cols in each row
+  //go through all the rows
+  for (let i = 0; i < row_count; i++) {
+    //a marker, to tell us when the row is all filled up. This act as a hypothesis that the row is filled until proven false by the loop that actually goes through each col(grid) in that row
+    let flag = true;
+    //then go through all the col(grids) within that row
+    for (let j = 0; j < col_count; j++) {
+      //if the any grids in this row is not being filled, then that means the current row is not filled
+      if (!fixedBlocks[i + "_" + j]) {
+        //if when we try to retrieve data from the fixed blocks already at the bottom, and the data returns undefined, that means there is nothing in that col
+        flag = false;
+        break;
+      }
+      //
+    }
+    if (flag) {
+      console.log("The current row has been filled up");
+      removeLine(i);
+    }
+  }
+}
+
+//clear the filled row
+function removeLine(line) {
+  //delete all the block elements in the row
+  //delete all the data of the blocks in that row as well
+  //go through all the col in that row
+  for (let i = 0; i < col_count; i++) {
+    document
+      .getElementById("container")
+      .removeChild(fixedBlocks[line + "_" + i]); //line is row, i = col
+    fixedBlocks[line + "_" + i] = null;
+  }
+  dropLines(line);
+}
+
+//drop all the above
+function dropLines(line) {
+  //1. have to add 1 to the row number of all of the above blocks, changing the data source
+  //have to make the blocks to drop within the 16 grid as well
+  //clear out the previous blocks
+
+  //go through the rows that was above teh cleared out row
+  for (let i = line - 1; i >= 0; i--) {
+    //the cols in every row
+    for (let j = 0; j < col_count; j++) {
+      //if there's no data within that row, then continue
+      if (!fixedBlocks[i + "_" + j]) continue;
+      //exist data
+      //add 1 to the row so it moves down
+      fixedBlocks[i + 1 + "_" + j] = fixedBlocks[i + "_" + j];
+      //then let the block drop within the 16-grid box
+      fixedBlocks[i + 1 + "_" + j].style.top = (i + 1) * step + "px";
+      //clear out the previous block element
+      fixedBlocks[i + "_" + j] = null;
+    }
+  }
+}
+
+//have the shape come down automatically
+//? where can we call this function? has to be after the shape is created and located on the container
+function autoDown() {
+  if (mInterval) {
+    clearInterval(mInterval);
+  }
+  mInterval = setInterval(function () {
+    move(0, 1); //it will let it move down the y-axis on it's own
+  }, 1000); //every 600 millisecond, it will run the function move, which re-generate a block and comes down
+}
+
+//? where do we check these conditions? Before we generate new shape each time! --------------------------
+//Condition to determine if the game is over
+function isGameOver() {
+  //when row 0 has blocks in existing where the block is going to drop
+  for (let i = 0; i < col_count; i++) {
+    if (fixedBlocks["0_" + i]) {
+      return true;
+    }
+  }
+  return false;
+}
+
+//function to stop the game
+function gameOver() {
+  //stops the interval timer
+  if (mInterval) {
+    clearInterval(mInterval);
+  }
+  //alert message
+  alert("Game Over!");
+}
+//? ------------------------------------------------------------------------------------------------------
