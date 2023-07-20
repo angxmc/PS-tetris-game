@@ -1,4 +1,4 @@
-import { cloneDeep } from "lodash";
+
 //constant
 //the distance moved every time, step length
 const step = 20;
@@ -146,7 +146,7 @@ function move(x, y) {
 // >> rotating the shapes
 function rotate() {
   //clone currentModel
-  let cloneCurrentModel = cloneDeep(currentModel);
+  let cloneCurrentModel = _.cloneDeep(currentModel);
   //calculation method
   //post- rotation row = pre-rotation col
   //post-rotation col = 3 - pre-rotation row

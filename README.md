@@ -70,6 +70,11 @@ For Example: the L shape:
 ### Blocks collision, how to limited the blocks activity when it meets other blocks?
 - left and right collision and bottom collision
 - need a function to determine when the blocks meet each other
+- this requires the position of all of the fixed blocks to be recorded in order for us to tell the function to do nothing when we try to move it into an occupied space
+- now we have completed the function *isMeet* to determine true or false. But we still have to make sure once it touches another block, rotation will also be stopped. 
+#### bottom collision
+- we only a function that stops the block an re-generate a new block  when it meets another block, not just the bottom 
+
 
 
 
