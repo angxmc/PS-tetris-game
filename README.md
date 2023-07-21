@@ -109,9 +109,18 @@ Now our blocks are rotating, when it meet the bottom border, it can no longer mo
 
 ### Now we finalize the program
 - we will need to have the program randomly generate different shape and drop automatically
-- we used the method incorporated in HS already: setInterval(), and let it run the *move* function on a set interval of a short amount of time, 600ms. and let it drop on a straight line down the y asix. so one step at a time
+- we used the method incorporated in HS already: setInterval(), and let it run the *move* function on a set interval of a short amount of time, 600ms. and let it drop on a straight line down the y-axis. so one step at a time
+
 ### Time to indicate when the game is over
 - automatic generation of shapes should be stopped when it reaches the top
+
+## buttons
+- there are two button, but there functions to go through 
+- the start/pause button
+  - when the button is clicked, it should check if the blocks are moving, if they are, stop the movement, if it is already stopped, then continue the move 
+- the NEW GAME button, it should clear out all the grids and start a new around of blocks 
+  - there should be a function to go through all the rows and grids, and clear out all the values and data if any grids returns any data. 
+  - then it should automatically drops down shapes after clearing all the shapes. 
 
 
 

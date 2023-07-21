@@ -425,3 +425,20 @@ function gameOver() {
   alert("Game Over!");
 }
 //? ------------------------------------------------------------------------------------------------------
+
+// ----- START/PAUSE BUTTON ---------------------------------------------------------------------
+//grab the button
+const startBtn = document.querySelector('#start');
+function isPaused(){
+  if(mInterval){
+    clearInterval(mInterval);
+  }
+}
+//add an Eventlistener to the button and the action/function it will do when click on
+startBtn.addEventListener('click', isPaused())
+
+
+// --NEW GAME BUTTON -------------------------------------------------------------------------
+const newGameBtn = document.querySelector('#new-game');
+
+newGameBtn.addEventListener('click', )

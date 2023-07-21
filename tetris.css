@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Moirai+One&family=Poiret+One&family=Tektur:wght@900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2&family=Codystar&family=Comfortaa:wght@300&family=Moirai+One&family=Noto+Sans:ital,wght@0,200;0,500;1,500&family=Poiret+One&family=Tektur:wght@900&display=swap');
 
 /* style the background container*/
 body {
@@ -9,13 +9,13 @@ body {
   background-color: black;
   overflow: hidden;
 }
-/* --------------------------------------------------------------- */
+
+/* ---------------- PAGE GRAPHICS & LAYOUT ----------------------------------------------- */
 section {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  align-content: space-between;
   min-height: 100vh;
   background: linear-gradient(to bottom, #413f42, #2c3639);
 }
@@ -114,7 +114,14 @@ section .color:nth-child(3) {
   border-bottom: 1px solid #2c3333;
   border-right: 1px solid #413f42;
 }
-/* ------------------------------------------------------------------- */
+.game-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: space-evenly;
+}
+
+/* ------------------BUTTONS GRAPHICS------------------------------------------------- */
 /* .buttons{
     display: flex;
     align-items: center;
@@ -149,7 +156,6 @@ section .color:nth-child(3) {
     #a076f9,
     #d7bbf5,
     #ede4ff,
-    #e4fbff,
     #b8b5ff,
     #7868e6,
     #440a67
@@ -243,42 +249,73 @@ section .color:nth-child(3) {
   opacity: 0;
 }
 
-/* --------------------------------------------------------------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------------------------------- */
 #game-title {
   margin: 100px;
-  width: 200px;
-  height: 50px;
+
   color: #fff;
   position: relative;
   font-family: "Moirai One", cursive;
   font-size: 60px;
   text-align: center;
 }
-/* --------------------------------------------------------------------------------------------------------------------------------- */
 
-/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+.instructions {
+  display: flex;
+  flex-direction: column;
+  background: #414141;
+  height: 360px;
+  margin: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #fff;
+  width: 200px;
+  flex-wrap: wrap;
+  border: 2px solid #313131;
+  
+  
+}
+h3 {
+  font-family: "Codystar", cursive;
+  text-align: center;
+}
+p {
+  font-family: 'Baloo 2', cursive;
+  text-align: center;
+  
+}
+ul {
+  font-family: 'Baloo 2', cursive;
+  
+}
+/*----------------------------------------------------------------------------------------------------- */
+
+/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
 .container {
   width: 200px;
   height: 360px;
-  background-color: #756e63;
+  background-color: #393E46;
   position: relative;
+  margin: 20px;
+  border: 2px solid#222831;
+  
 }
 
 /* style the 20*20 block element*/
 .activity-model {
   width: 20px;
   height: 20px;
-  background-color: lightcoral;
-  border: 0.3px solid #a8a196;
+  background-color: #BDBDD7;
+  border: 0.3px solid #8787A3;
   box-sizing: border-box;
   position: absolute;
 }
 .fixed-model {
   width: 20px;
   height: 20px;
-  background-color: #616161;
-  border: 0.3px solid #a8a196;
+  background-color: #393232;
+  border: 0.3px solid #4D4545;
   box-sizing: border-box;
   position: absolute;
 }
-/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
