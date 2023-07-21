@@ -65,7 +65,7 @@ For Example: the L shape:
 -Basically, we have this 4x4 box that contains the shape, and we are moving the box to move the shape inside. 
 -__Rotation__:
     - we need to find the pattern of how the location of the shape rotate within the 4x4 box
->      0 1 2 3        0 1 2 3          0 1 2 3
+>       0 1 2 3           0 1 2 3             0 1 2 3
      0   1          0                0 
      1   2          1   3 2 1        1   4 3
      2   3 4        2   4            2     2
