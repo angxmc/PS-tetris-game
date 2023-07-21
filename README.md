@@ -120,12 +120,16 @@ Now our blocks are rotating, when it meet the bottom border, it can no longer mo
 
 # resources: 
 ======
-https://www.youtube.com/watch?v=rAUn1Lom6dw
 
-【JavaScript前端课程-dom-bom-js-es6新语法-jQuery-数据可视化echarts黑马pink老师前端入门基础视频教程(500多集)持续】https://www.bilibili.com/video/BV1Sy4y1C7ha?p=142&vd_source=d66e6286bcebdd2194e9e66f6d48ff09
+## Game Logic:
 
-https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes
+https://www.bilibili.com/video/BV11E411x7jw?p=10&vd_source=d66e6286bcebdd2194e9e66f6d48ff09
 
-【【黑马程序员】使用JS两个小时实现俄罗斯方块小游戏【配套源码+笔记】】https://www.bilibili.com/video/BV11E411x7jw?p=10&vd_source=d66e6286bcebdd2194e9e66f6d48ff09
+
+## CSS:
+
+https://youtu.be/mW0Z1T8l7sU
+
+https://www.bilibili.com/video/BV1pF411d7PL?vd_source=d66e6286bcebdd2194e9e66f6d48ff09
 
 

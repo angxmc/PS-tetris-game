@@ -1,25 +1,284 @@
+@import url("https://fonts.googleapis.com/css2?family=Moirai+One&family=Poiret+One&family=Tektur:wght@900&display=swap");
+
 /* style the background container*/
-.container{
-    width: 200px;
-    height:360px;
-    background-color: #ffdead;
-    position: relative;
+body {
+  /* display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center; */
+  background-color: black;
+  overflow: hidden;
+}
+/* --------------------------------------------------------------- */
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: space-between;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #413f42, #2c3639);
+}
+section .color {
+  position: absolute;
+  filter: blur(150px);
+}
+section .color:nth-child(1) {
+  top: -350px;
+  width: 600px;
+  height: 600px;
+  background: #1b2430;
 }
 
-/* style the 20*20 block element*/ 
-.activity-model{
-    width:20px;
-    height: 20px;
-    background-color: lightcoral;
-    border: 0.3px solid #A8A196 ;
-    box-sizing: border-box;
-    position: absolute;
+section .color:nth-child(2) {
+  bottom: -150px;
+  left: 100px;
+  width: 500px;
+  height: 500px;
+  background: #2c3333;
 }
-.fixed-model{
-    width:20px;
-    height: 20px;
-    background-color: #616161;
-    border: 0.3px solid #A8A196 ;
-    box-sizing: border-box;
-    position: absolute;
+section .color:nth-child(3) {
+  bottom: 50px;
+  right: 100px;
+  width: 300px;
+  height: 300px;
+  background: #1b2430;
 }
+.box {
+  position: relative;
+}
+.box .square {
+  position: absolute;
+  backdrop-filter: blur(20px);
+  box-shadow: 0px 5px 10px 5px #526d82;
+  background: #353636;
+  border-radius: 5px;
+  animation: animate 10s linear infinite;
+  animation-delay: calc(-1s * var(--i));
+}
+@keyframes animate {
+  0%,
+  100% {
+    transform: translateY(-40px);
+  }
+  50% {
+    transform: translateY(40px);
+  }
+}
+.box .square:nth-child(1) {
+  top: -50px;
+  right: -60px;
+  width: 100px;
+  height: 100px;
+}
+.box .square:nth-child(2) {
+  top: 150px;
+  left: -100px;
+  width: 120px;
+  height: 120px;
+  z-index: 2;
+}
+.box .square:nth-child(3) {
+  bottom: 50px;
+  right: -60px;
+  width: 80px;
+  height: 80px;
+  z-index: 2;
+}
+.box .square:nth-child(4) {
+  bottom: -80px;
+  left: 100px;
+  width: 50px;
+  height: 50px;
+}
+.box .square:nth-child(5) {
+  top: -80px;
+  left: 140px;
+  width: 60px;
+  height: 60px;
+}
+.game-box {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 600px;
+  min-height: 600px;
+  background: #353636;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-evenly;
+  border-radius: 5px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0px 5px 10px 5px #526d82;
+  border: 1px solid #27374d;
+  border-bottom: 1px solid #2c3333;
+  border-right: 1px solid #413f42;
+}
+/* ------------------------------------------------------------------- */
+/* .buttons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
+#start {
+  margin: 20px;
+  width: 200px;
+  height: 50px;
+  background: #222;
+  color: #fff;
+  font-family: "Poiret One", cursive;
+  position: relative;
+  cursor: pointer;
+  z-index: 1;
+  border-radius: 10px;
+}
+#start::before {
+  content: "";
+  width: 208px;
+  height: 58px;
+  background: #222;
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  transition: all 0.35s;
+  border-radius: 10px;
+  z-index: -1;
+  background: linear-gradient(
+    45deg,
+    #6528f7,
+    #a076f9,
+    #d7bbf5,
+    #ede4ff,
+    #e4fbff,
+    #b8b5ff,
+    #7868e6,
+    #440a67
+  );
+  filter: blur(5px);
+  background-size: 1000%;
+  animation: amSize 40s linear infinite;
+  opacity: 0;
+}
+#start::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #222;
+  border-radius: 10px;
+  z-index: -1;
+  opacity: 1;
+}
+
+#start:hover::before {
+  opacity: 1;
+}
+#start:active::after {
+  opacity: 0;
+}
+#new-game {
+  margin: 20px;
+  width: 200px;
+  height: 50px;
+  background: #222;
+  color: #fff;
+  font-family: "Poiret One", cursive;
+  position: relative;
+  cursor: pointer;
+  z-index: 1;
+  border-radius: 10px;
+}
+#new-game::before {
+  content: "";
+  width: 208px;
+  height: 58px;
+  background: #222;
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  transition: all 0.35s;
+  border-radius: 10px;
+  z-index: -1;
+  background: linear-gradient(
+    45deg,
+    #feffde,
+    #ddffbc,
+    #91c788,
+    #52734d,
+    #8cba51
+  );
+  filter: blur(5px);
+  background-size: 1000%;
+  animation: amSize 40s linear infinite;
+  opacity: 0;
+}
+
+#new-game::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #222;
+  border-radius: 10px;
+  z-index: -1;
+  opacity: 1;
+}
+
+@keyframes amSize {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 1000% 0;
+  }
+}
+#new-game:hover::before {
+  opacity: 1;
+}
+#new-game:active::after {
+  opacity: 0;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------------- */
+#game-title {
+  margin: 100px;
+  width: 200px;
+  height: 50px;
+  color: #fff;
+  position: relative;
+  font-family: "Moirai One", cursive;
+  font-size: 60px;
+  text-align: center;
+}
+/* --------------------------------------------------------------------------------------------------------------------------------- */
+
+/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+.container {
+  width: 200px;
+  height: 360px;
+  background-color: #756e63;
+  position: relative;
+}
+
+/* style the 20*20 block element*/
+.activity-model {
+  width: 20px;
+  height: 20px;
+  background-color: lightcoral;
+  border: 0.3px solid #a8a196;
+  box-sizing: border-box;
+  position: absolute;
+}
+.fixed-model {
+  width: 20px;
+  height: 20px;
+  background-color: #616161;
+  border: 0.3px solid #a8a196;
+  box-sizing: border-box;
+  position: absolute;
+}
+/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
