@@ -440,5 +440,3 @@ startBtn.addEventListener('click', isPaused())
 
 // --NEW GAME BUTTON -------------------------------------------------------------------------
 const newGameBtn = document.querySelector('#new-game');
-
-newGameBtn.addEventListener('click', )
