@@ -92,7 +92,7 @@ For Example: the L shape:
 - need a function to determine when the blocks meet each other
 - this requires the position of all of the fixed blocks to be recorded in order for us to tell the function to do nothing when we try to move it into an occupied space
 - now we have completed the function *isMeet* to determine true or false. But we still have to make sure once it touches another block, rotation will also be stopped. 
-#### bottom collision
+#### Bottom collision
 - we only a function that stops the block an re-generate a new block when it meets another block, not just when the bottom of the container is met
 - when does meeting the bottom of the shapes happen? It happens when we are moving the 4x4 box(16 -gird)
 - so we have to adjust the *move* function, the detection of the bottom of the shape happens when we are moving it on the y-axis
@@ -128,7 +128,7 @@ Now our blocks are rotating, when it meet the bottom border, it can no longer mo
 
 
 # resources: 
-======
+
 
 ## Game Logic:
 

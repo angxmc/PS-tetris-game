@@ -1,3 +1,4 @@
+document.addEventListener("DOMContentLoaded", init);
 //constant
 //the distance moved every time, step length
 const step = 20;
@@ -7,9 +8,6 @@ const row_count = 18;
 const col_count = 10;
 
 let score = 0;
-
-const newGameBtn = document.querySelector("#new-game");
-const startBtn = document.querySelector("#start");
 
 // >> create each model's data source, the rows and cols of each shape
 const models = [
@@ -138,6 +136,7 @@ function init() {
 function updateScore() {
   document.getElementById("score").textContent = score;
 }
+
 // based on the model data source to create the block elements
 function createModel() {
   // = test if the game can continue first
@@ -164,7 +163,7 @@ function createModel() {
   autoDown();
 }
 
-//position the location of the block elements based on teh data source
+//position the location of the block elements based on the data source
 function locationBlocks() {
   //determine if the shape is within the boundaries of the container, if not, correct teh location
   checkBound();
@@ -240,6 +239,7 @@ function move(x, y) {
   currentY += y;
   //now we want to locate the shape/block elements by locating the 16-grid box
   locationBlocks();
+  console.log(currentModel);
 }
 
 // >> rotating the shapes --------------------------------------------------------------------------------
@@ -270,6 +270,7 @@ function rotate() {
   currentModel = cloneCurrentModel;
   //re-position the block
   locationBlocks();
+  console.log(currentModel);
 }
 
 // >> control the shape models to move only within the container -----------------------------------------
@@ -315,6 +316,10 @@ function fixedBottomModel() {
     fixedBlocks[currentY + blockModel.row + "_" + (currentX + blockModel.col)] =
       activityModelEle;
     console.log(fixedBlocks);
+    console.log(blockModel.row);
+    console.log(currentX);
+    console.log(currentY);
+    console.log(blockModel.col);
   }
 
   //call this function to determine if we need to clear the row
@@ -452,24 +457,44 @@ function toggleGame() {
   } else {
     autoDown();
   }
+  console.log("toggleGame function is working");
 }
 //add an Eventlistener to the button and the action/function it will do when click on
-startBtn.addEventListener("click", isPaused);
 
 // --NEW GAME BUTTON -------------------------------------------------------------------------
 
 function clearGrid() {
-  for (let i = 0; i < row_count; i++) {
-    for (let j = 0; j < col_count; j++) {
-      if (!fixedBlocks[i + "_" + j]) continue;
-      document
-        .getElementById("container")
-        .removeChild(fixedBlocks[i + "_" + j]); //line is row, i = col
-      fixedBlocks[i + "_" + j] = null;
+  // location.reload();
+  console.log(fixedBlocks);
+  for (const key in fixedBlocks) {
+    const blockElement = fixedBlocks[key];
+    const doc = document.getElementById("container");
+    while (doc.firstChild) {
+      doc.firstChild.remove();
+      fixedBlocks[key] = null;
     }
+    // if (blockElement) {
+    //   document.getElementById("container").removeChild(blockElement);
+    //   // let container = document.getElementById('container');
+    //   // container.innerHTML='';
+    //   fixedBlocks[key] = null;
+    // }
   }
+  // for(i=0;i<row_count;i++){
+  //   for(j=0;j<col_count;j++){
+  //     if (!fixedBlocks[i + "_" + j]) continue;
+  //     document
+  //       .getElementById("container")
+  //       .removeChild(fixedBlocks[i + "_" + j]); //i is row, j = col
+  //     fixedBlocks[i + "_" + j] = null;
+  //   }
+  // }
+  console.log(fixedBlocks);
+  console.log(document.getElementById("container"));
   createModel();
+  console.log("grid cleared");
 }
+const newGameBtn = document.getElementById("new-game");
+const startBtn = document.getElementById("start");
 newGameBtn.addEventListener("click", clearGrid);
-
-document.addEventListener("DOMContentLoaded", init);
+startBtn.addEventListener("click", toggleGame);
