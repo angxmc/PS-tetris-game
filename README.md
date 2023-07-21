@@ -66,10 +66,10 @@ For Example: the L shape:
 -__Rotation__:
     - we need to find the pattern of how the location of the shape rotate within the 4x4 box
 >      0 1 2 3        0 1 2 3          0 1 2 3
->    0   1          0                0 
->    1   2          1   3 2 1        1   4 3
->    2   3 4        2   4            2     2
->    3              3                3     1
+     0   1          0                0 
+     1   2          1   3 2 1        1   4 3
+     2   3 4        2   4            2     2
+     3              3                3     1
  - block 1:row=0;col=1 (1st)
  - block 2: row=1; col=3 (2nd)
  - block 3: row=3; col=2 (3rd)
