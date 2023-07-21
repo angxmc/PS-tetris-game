@@ -70,11 +70,11 @@ For Example: the L shape:
 >    1   2          1   3 2 1        1   4 3
 >    2   3 4        2   4            2     2
 >    3              3                3     1
-    - block 1:row=0;col=1 (1st)
-    - block 2: row=1; col=3 (2nd)
-    - block 3: row=3; col=2 (3rd)
-    - the pattern for row # is that the column number will equal to it's row number after each rotation
-    - the pattern for col# = 3-the row#, for each rotation
+ - block 1:row=0;col=1 (1st)
+ - block 2: row=1; col=3 (2nd)
+ - block 3: row=3; col=2 (3rd)
+ - the pattern for row # is that the column number will equal to it's row number after each rotation
+ - the pattern for col# = 3-the row#, for each rotation
 
 ### How to limit the shapes to moving within the container?
 - to control the shape model, we need a method/function to complete this actions for us. 
