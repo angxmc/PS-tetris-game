@@ -6,6 +6,11 @@ const step = 20;
 const row_count = 18;
 const col_count = 10;
 
+let score = 0;
+
+const newGameBtn = document.querySelector("#new-game");
+const startBtn = document.querySelector("#start");
+
 // >> create each model's data source, the rows and cols of each shape
 const models = [
   //the first data source(L shape) horizontal L with tail facing up
@@ -130,10 +135,13 @@ function init() {
   onKeyDown();
 }
 
+function updateScore() {
+  document.getElementById("score").textContent = score;
+}
 // based on the model data source to create the block elements
 function createModel() {
   // = test if the game can continue first
-  if(isGameOver()){
+  if (isGameOver()) {
     gameOver();
     return;
   }
@@ -253,7 +261,7 @@ function rotate() {
     blockModel.col = 3 - temp;
   }
 
-  //we can use current x,y coordinate because there is no position moves
+  //we can use current x,y coordinate because there is no position changes
   if (isMeet(currentX, currentY, cloneCurrentModel)) {
     return;
   }
@@ -306,7 +314,7 @@ function fixedBottomModel() {
     let blockModel = currentModel[i];
     fixedBlocks[currentY + blockModel.row + "_" + (currentX + blockModel.col)] =
       activityModelEle;
-      console.log(fixedBlocks);
+    console.log(fixedBlocks);
   }
 
   //call this function to determine if we need to clear the row
@@ -367,6 +375,8 @@ function removeLine(line) {
     fixedBlocks[line + "_" + i] = null;
   }
   dropLines(line);
+  score += 10;
+  updateScore();
 }
 
 //drop all the above
@@ -421,22 +431,45 @@ function gameOver() {
   if (mInterval) {
     clearInterval(mInterval);
   }
+  resetScore();
   //alert message
   alert("Game Over!");
 }
 //? ------------------------------------------------------------------------------------------------------
 
+function resetScore() {
+  score = 0;
+  updateScore();
+}
+
 // ----- START/PAUSE BUTTON ---------------------------------------------------------------------
 //grab the button
-const startBtn = document.querySelector('#start');
-function isPaused(){
-  if(mInterval){
+
+function toggleGame() {
+  if (mInterval) {
     clearInterval(mInterval);
+    mInterval = null;
+  } else {
+    autoDown();
   }
 }
 //add an Eventlistener to the button and the action/function it will do when click on
-startBtn.addEventListener('click', isPaused())
-
+startBtn.addEventListener("click", isPaused);
 
 // --NEW GAME BUTTON -------------------------------------------------------------------------
-const newGameBtn = document.querySelector('#new-game');
+
+function clearGrid() {
+  for (let i = 0; i < row_count; i++) {
+    for (let j = 0; j < col_count; j++) {
+      if (!fixedBlocks[i + "_" + j]) continue;
+      document
+        .getElementById("container")
+        .removeChild(fixedBlocks[i + "_" + j]); //line is row, i = col
+      fixedBlocks[i + "_" + j] = null;
+    }
+  }
+  createModel();
+}
+newGameBtn.addEventListener("click", clearGrid);
+
+document.addEventListener("DOMContentLoaded", init);

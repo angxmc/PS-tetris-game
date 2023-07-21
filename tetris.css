@@ -279,6 +279,10 @@ h3 {
   font-family: "Codystar", cursive;
   text-align: center;
 }
+#score{
+  font-family: "Codystar", cursive;
+  text-align: center;
+}
 p {
   font-family: 'Baloo 2', cursive;
   text-align: center;
@@ -307,7 +311,7 @@ ul {
   height: 20px;
   background-color: #BDBDD7;
   border: 0.3px solid #8787A3;
-  box-sizing: border-box;
+  box-sizing: border-box; /* ? */
   position: absolute;
 }
 .fixed-model {
