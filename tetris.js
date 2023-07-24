@@ -464,22 +464,22 @@ function toggleGame() {
 // --NEW GAME BUTTON -------------------------------------------------------------------------
 
 function clearGrid() {
-  // location.reload();
-  console.log(fixedBlocks);
-  for (const key in fixedBlocks) {
-    const blockElement = fixedBlocks[key];
-    const doc = document.getElementById("container");
-    while (doc.firstChild) {
-      doc.firstChild.remove();
-      fixedBlocks[key] = null;
-    }
+  location.reload();
+  // console.log(fixedBlocks);
+  // for (const key in fixedBlocks) {
+  //   const blockElement = fixedBlocks[key];
+  //   const doc = document.getElementById("container");
+  //   while (doc.firstChild) {
+  //     doc.firstChild.remove();
+  //     fixedBlocks[key] = null;
+  //   }
     // if (blockElement) {
     //   document.getElementById("container").removeChild(blockElement);
     //   // let container = document.getElementById('container');
     //   // container.innerHTML='';
     //   fixedBlocks[key] = null;
     // }
-  }
+  // }
   // for(i=0;i<row_count;i++){
   //   for(j=0;j<col_count;j++){
   //     if (!fixedBlocks[i + "_" + j]) continue;
